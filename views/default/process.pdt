@@ -1,0 +1,5 @@
+<?php
+$this->Form->setCsrfOptions(['set_on_create' => true]);
+$this->Form->create($post_to);
+$this->Form->fieldSubmit('submit', $this->_('Fresapagos.buildprocess.submit', true), ['class' => 'float-right mt-2']);
+$this->Form->end();

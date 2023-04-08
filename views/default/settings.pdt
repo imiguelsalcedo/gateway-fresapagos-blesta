@@ -1,0 +1,23 @@
+<ul>
+    <li>
+        <?php
+        $this->Form->label($this->_('Fresapagos.api_key', true), 'api_key');
+        $this->Form->fieldText('api_key', (isset($meta['api_key']) ? $meta['api_key'] : null), ['id' => 'api_key']);
+        ?>
+	<span class="tooltip"><?php $this->_('AppController.tooltip.text');?><div><?php $this->_('Fresapagos.api_key_note');?></div></span>
+    </li>
+    <li>
+        <?php
+        $this->Form->label($this->_('Fresapagos.access_token', true), 'access_token');
+        $this->Form->fieldText('access_token', (isset($meta['access_token']) ? $meta['access_token'] : null), ['id' => 'access_token']);
+        ?>
+	<span class="tooltip"><?php $this->_('AppController.tooltip.text');?><div><?php $this->_('Fresapagos.access_token_note');?></div></span>
+    </li>
+    <li>
+        <?php
+        $this->Form->fieldCheckbox('sandbox', 'true', ((isset($meta['sandbox']) ? $meta['sandbox'] : 'false') == 'true'), ['id'=>'sandbox']);
+        $this->Form->label($this->_('Fresapagos.sandbox', true), 'sandbox', ['class'=>'inline']);
+       ?>
+	<span class="tooltip"><?php $this->_('AppController.tooltip.text');?><div><?php $this->_('Fresapagos.sandbox_note');?></div></span>
+	</li>
+</ul>
