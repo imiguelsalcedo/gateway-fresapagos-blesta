@@ -186,7 +186,7 @@ class Fresapagos extends NonmerchantGateway
             'currency' => $this->currency,
             'reference' => $this->serializeInvoices($invoice_amounts),
             'description' => $options['description'] ?? null,
-            'test' => (bool)($this->meta['sandbox'] ?? 'false' == 'true'),
+            'test' => $this->meta['sandbox'] ?? 'true' == 'false',
             'return_url' => $options['return_url'] ?? null,
             'webhook' => Configure::get('Blesta.gw_callback_url') . Configure::get('Blesta.company_id') .
             '/fresapagos/?client_id=' . ($contact_info['client_id'] ?? ''),
