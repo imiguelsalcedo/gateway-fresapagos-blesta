@@ -195,10 +195,6 @@ class Fresapagos extends NonmerchantGateway
                 'name' => $name,
                 'identification' => $identification
             ],
-            'sources' => [
-                'visa',
-                'mastercard'
-            ],
             'options' => [
                 'theme' => [
                     'type' => 'light',
