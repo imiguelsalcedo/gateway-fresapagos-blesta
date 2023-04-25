@@ -11,4 +11,4 @@ $lang['Fresapagos.buildprocess.submit'] = 'Pagar con Fresapagos';
 
 $lang['Fresapagos.!error.api_key.empty'] = 'Por favor, ingrese su API Key.';
 $lang['Fresapagos.!error.secret_key.empty'] = 'Por favor, ingrese su Access Token.';
-$lang['Fresapagos.!error.sandbox.valid'] = 'El modo Sandbox debe ser establecido en 'true' o 'false'.';
+$lang['Fresapagos.!error.sandbox.valid'] = 'El modo Sandbox debe ser establecido en true o false.';
