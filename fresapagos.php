@@ -274,7 +274,7 @@ class Fresapagos extends NonmerchantGateway
         $this->log(
             'validate',
             json_encode(
-                ['id' => $callback_data->payment->id],
+                ['id' => $callback_data->data->payment->id],
                 JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
             ),
             'output',
@@ -282,7 +282,7 @@ class Fresapagos extends NonmerchantGateway
         );
 
         $transactionId = [
-             'id' => $callback_data->payment->id
+             'id' => $callback_data->data->payment->id
         ];
 
         $result = $api->checkPayment($transactionId ?? null);
