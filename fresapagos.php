@@ -317,8 +317,7 @@ class Fresapagos extends NonmerchantGateway
         return [
             'client_id' => $get['client_id'] ?? null,
             'amount' => $data->transaction->payment->total ?? 0,
-             'currency' => 'ARS',
-             //'currency' => $data->transaction->payment->currency->code ?? null,
+            'currency' => $data->transaction->payment->currency->code ?? null,
             'status' =>  $status,
             'reference_id' => null,
             'transaction_id' => $data->transaction->payment->id ?? null,
@@ -360,8 +359,7 @@ class Fresapagos extends NonmerchantGateway
          return [
              'client_id' => $get['client_id'] ?? null,
              'amount' => $data->transaction->payment->total ?? 0,
-             'currency' => 'ARS',
-             //'currency' => $data->transaction->payment->currency->code ?? null,
+             'currency' => $data->transaction->payment->currency->code ?? null,
              'status' =>  'approved',
              'reference_id' => null,
              'transaction_id' => $data->transaction->payment->id ?? null,
