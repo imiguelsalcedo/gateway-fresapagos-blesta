@@ -202,8 +202,7 @@ class Fresapagos extends NonmerchantGateway
                 'theme' => [
                     'type' => 'light',
                     'header' => [
-                        'name' => $company->name,
-                        'logo' => 'https://res.mobbex.com/images/icons/def_store.png'
+                        'name' => $company->name
                     ],
                     'colors' => [
                         'primary' => '#000000'
