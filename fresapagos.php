@@ -176,17 +176,20 @@ class Fresapagos extends NonmerchantGateway
         // Get client data
         $client = $this->Clients->get($contact_info['client_id']);
 
-        $name= $contact_info['first_name'] .' '. $contact_info['last_name'];
+        $name = $contact_info['first_name'] .' '. $contact_info['last_name'];
 
         $tax_id = explode("-", $client->settings['tax_id']);
         $identification = $tax_id[1];
+
+        // Get sandbox mode
+        $sandbox_mode = filter_var($this->meta['sandbox'], FILTER_VALIDATE_BOOLEAN);
 
         $params = [
             'total' => floatval($amount),
             'currency' => $this->currency,
             'reference' => $this->serializeInvoices($invoice_amounts),
             'description' => $options['description'] ?? null,
-            'test' => $this->meta['sandbox'] ?? 'true' == 'false',
+            'test' => $sandbox_mode,
             'return_url' => $options['return_url'] ?? null,
             'webhook' => Configure::get('Blesta.gw_callback_url') . Configure::get('Blesta.company_id') .
             '/fresapagos/?client_id=' . ($contact_info['client_id'] ?? ''),
@@ -199,8 +202,7 @@ class Fresapagos extends NonmerchantGateway
                 'theme' => [
                     'type' => 'light',
                     'header' => [
-                        'name' => $company->name,
-                        'logo' => 'https://res.mobbex.com/images/icons/def_store.png'
+                        'name' => $company->name
                     ],
                     'colors' => [
                         'primary' => '#000000'
@@ -274,7 +276,7 @@ class Fresapagos extends NonmerchantGateway
         $this->log(
             'validate',
             json_encode(
-                ['id' => $callback_data->payment->id],
+                ['id' => $callback_data->data->payment->id],
                 JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
             ),
             'output',
@@ -282,7 +284,7 @@ class Fresapagos extends NonmerchantGateway
         );
 
         $transactionId = [
-             'id' => $callback_data->payment->id
+             'id' => $callback_data->data->payment->id
         ];
 
         $result = $api->checkPayment($transactionId ?? null);
@@ -315,8 +317,7 @@ class Fresapagos extends NonmerchantGateway
         return [
             'client_id' => $get['client_id'] ?? null,
             'amount' => $data->transaction->payment->total ?? 0,
-             'currency' => 'ARS',
-             //'currency' => $data->transaction->payment->currency->code ?? null,
+            'currency' => $data->transaction->payment->currency->code ?? null,
             'status' =>  $status,
             'reference_id' => null,
             'transaction_id' => $data->transaction->payment->id ?? null,
@@ -358,8 +359,7 @@ class Fresapagos extends NonmerchantGateway
          return [
              'client_id' => $get['client_id'] ?? null,
              'amount' => $data->transaction->payment->total ?? 0,
-             'currency' => 'ARS',
-             //'currency' => $data->transaction->payment->currency->code ?? null,
+             'currency' => $data->transaction->payment->currency->code ?? null,
              'status' =>  'approved',
              'reference_id' => null,
              'transaction_id' => $data->transaction->payment->id ?? null,
